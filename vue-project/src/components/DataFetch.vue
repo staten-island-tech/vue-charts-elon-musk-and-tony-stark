@@ -1,12 +1,11 @@
 <template>
     <div>
-
+Hello World!
     </div>
 </template>
 
 <script setup>
 import GtfsRealtimeBindings from "gtfs-realtime-bindings";
-import fetch from "node-fetch";
 
 (async () => {
   try {
@@ -30,6 +29,7 @@ import fetch from "node-fetch";
     feed.entity.forEach((entity) => {
       if (entity.tripUpdate) {
         console.log(entity.tripUpdate);
+        console.log(feed)
       }
     });
   }
