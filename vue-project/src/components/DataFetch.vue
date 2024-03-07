@@ -1,13 +1,13 @@
 <template>
   <div>
-    <button @click="test">click me</button>
   </div>
 </template>
 
 <script setup>
 import GtfsRealtimeBindings from 'gtfs-realtime-bindings'
 import { onBeforeMount } from 'vue'
-let data = []
+import { ref } from 'vue';
+const data = ref([])
 async function test() {
   ;(async () => {
     try {
@@ -29,8 +29,8 @@ async function test() {
       }
       const buffer = await response.arrayBuffer()
       const feed = GtfsRealtimeBindings.transit_realtime.FeedMessage.decode(new Uint8Array(buffer))
-      data = feed.entity
-      console.log(data)
+      data.value = feed.entity
+      console.log(data.value)
      
       
     } catch (error) {
