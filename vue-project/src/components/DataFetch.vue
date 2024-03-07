@@ -1,13 +1,12 @@
 <template>
-    <div>
-Hello World!
+    <div>   
+    <h1 v-for="trip in feed"></h1>
     </div>
 </template>
 
 <script setup>
 import GtfsRealtimeBindings from "gtfs-realtime-bindings";
-
-(async () => {
+async function fetch() {
   try {
     const response = await fetch("https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-bdfm", {
       headers: {
@@ -37,7 +36,7 @@ import GtfsRealtimeBindings from "gtfs-realtime-bindings";
     console.log(error);
     process.exit(1);
   }
-})();
+}();
 </script>
 
 <style lang="css" scoped>
