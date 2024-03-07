@@ -1,11 +1,12 @@
 <template>
-    <div>   
-    <h1 v-for="trip in feed"></h1>
-    </div>
+    <div>  
+      <button @click="fetch">click me</button>
+      </div>
 </template>
 
 <script setup>
 import GtfsRealtimeBindings from "gtfs-realtime-bindings";
+let data = []
 async function fetch() {
   try {
     const response = await fetch("https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-bdfm", {
@@ -28,6 +29,7 @@ async function fetch() {
     feed.entity.forEach((entity) => {
       if (entity.tripUpdate) {
         console.log(entity.tripUpdate);
+        data = feed
         console.log(feed)
       }
     });
