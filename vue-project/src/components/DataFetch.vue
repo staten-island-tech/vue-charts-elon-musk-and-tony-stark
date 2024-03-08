@@ -1,12 +1,12 @@
 <template>
   <div>
-    <h1 v-for="entity in data">{{ entity.trip }}</h1>
   </div>
 </template>
 
 <script setup>
 import GtfsRealtimeBindings from 'gtfs-realtime-bindings'
 import { onBeforeMount } from 'vue'
+import { store } from '@/stores/store';
 import { ref } from 'vue';
 const data = ref([])
 async function test() {
@@ -39,6 +39,8 @@ async function test() {
      }
       )
       console.log(gooddata.value)
+      store.usedata === gooddata.value
+      console.log(store.usedata)
     } catch (error) {
       console.log(error)
       process.exit(1)
@@ -46,10 +48,14 @@ async function test() {
   })()
 }
 const gooddata = ref([])
-
+function blah() {
+  gooddata.value=[]
+}
 onBeforeMount(() => {
   test()
+  setInterval(blah, 4500)
   setInterval(test, 5000)
+
 })
 </script>
 
