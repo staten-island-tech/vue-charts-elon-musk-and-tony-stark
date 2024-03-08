@@ -1,5 +1,6 @@
 <template>
   <div>
+    <h1 v-for="entity in data">{{ entity.trip }}</h1>
   </div>
 </template>
 
@@ -31,14 +32,20 @@ async function test() {
       const feed = GtfsRealtimeBindings.transit_realtime.FeedMessage.decode(new Uint8Array(buffer))
       data.value = feed.entity
       console.log(data.value)
-     
-      
+      data.value.forEach((el) =>{
+     if (el.hasOwnProperty("vehicle")) {
+        gooddata.value.push(el)
+        } 
+     }
+      )
+      console.log(gooddata.value)
     } catch (error) {
       console.log(error)
       process.exit(1)
     }
   })()
 }
+const gooddata = ref([])
 
 onBeforeMount(() => {
   test()
