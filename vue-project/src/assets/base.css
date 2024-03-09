@@ -33,6 +33,7 @@
   --color-heading: var(--vt-c-text-light-1);
   --color-text: var(--vt-c-text-light-1);
   --color-bg-anti: var(--vt-c-black-soft);
+  --color-text-anti: var(--vt-c-white-soft)
 
   --section-gap: 160px;
 }
@@ -49,6 +50,8 @@
     --color-heading: var(--vt-c-text-dark-1);
     --color-text: var(--vt-c-text-dark-2);
     --color-bg-anti: var(--vt-c-white-soft);
+    --color-text-anti: var(--vt-c-black-soft)
+
   }
 }
 

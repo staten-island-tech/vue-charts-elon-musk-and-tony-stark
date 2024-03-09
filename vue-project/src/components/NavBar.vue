@@ -21,5 +21,6 @@
 
   .button:hover {
     background-color: var(--color-bg-anti);
+    color: var(--color-text-anti)
   }
 </style>
