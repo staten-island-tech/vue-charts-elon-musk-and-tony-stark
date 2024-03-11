@@ -6,6 +6,7 @@
 <script setup>
 import GtfsRealtimeBindings from 'gtfs-realtime-bindings'
 import { onBeforeMount } from 'vue'
+import { usedata } from '@/stores/store';
 import { ref } from 'vue';
 const data = ref([])
 async function test() {
@@ -32,15 +33,31 @@ async function test() {
       console.log(data.value)
 
       
+      data.value.forEach((el) =>{
+     if (el.hasOwnProperty("vehicle")) {
+        gooddata.value.push(el)
+        } 
+     }
+      )
+      console.log(gooddata.value)
+      gooddata.value.forEach((el) => {
+      usedata.value.push(el)
+     })
+      console.log(usedata.value)
     } catch (error) {
       console.log(error)
     }
   })()
 }
-
+const gooddata = ref([])
+function blah() {
+  gooddata.value=[]
+}
 onBeforeMount(() => {
   test()
+  setInterval(blah, 4500)
   setInterval(test, 5000)
+
 })
 </script>
 
