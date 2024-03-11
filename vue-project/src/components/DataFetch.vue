@@ -6,7 +6,7 @@
 <script setup>
 import GtfsRealtimeBindings from 'gtfs-realtime-bindings'
 import { onBeforeMount } from 'vue'
-import { store } from '@/stores/store';
+import { usedata } from '@/stores/store';
 import { ref } from 'vue';
 const data = ref([])
 async function test() {
@@ -39,8 +39,10 @@ async function test() {
      }
       )
       console.log(gooddata.value)
-      store.usedata === gooddata.value
-      console.log(store.usedata)
+      gooddata.value.forEach((el) => {
+      usedata.value.push(el)
+     })
+      console.log(usedata.value)
     } catch (error) {
       console.log(error)
       process.exit(1)
