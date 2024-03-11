@@ -6,7 +6,7 @@
 <script setup>
 import GtfsRealtimeBindings from 'gtfs-realtime-bindings'
 import { onBeforeMount } from 'vue'
-import { usedata } from '@/stores/store';
+import { usedata, labels,routes } from '@/stores/store';
 import { ref } from 'vue';
 const data = ref([])
 async function test() {
@@ -31,18 +31,30 @@ async function test() {
       const buffer = await response.arrayBuffer()
       const feed = GtfsRealtimeBindings.transit_realtime.FeedMessage.decode(new Uint8Array(buffer))
       data.value = feed.entity
-      console.log(data.value)
       data.value.forEach((el) =>{
      if (el.hasOwnProperty("vehicle")) {
         gooddata.value.push(el)
         } 
      }
       )
-      console.log(gooddata.value)
       gooddata.value.forEach((el) => {
       usedata.value.push(el)
      })
-      console.log(usedata.value)
+      console.log(usedata.value.length)
+      usedata.value.forEach((el) => {
+   labels.value.push(el.vehicle.trip.routeId)
+      })
+      labels.value.forEach((el) => {
+        if (el === "B") {
+          routes.value[0] ++
+        } else if (el === "F") {
+          routes.value[1] ++
+        } else if (el === "D") {
+          routes.value[2] ++
+        } else {
+          routes.value[3] ++
+        }
+    })
     } catch (error) {
       console.log(error)
       process.exit(1)
@@ -51,11 +63,14 @@ async function test() {
 }
 const gooddata = ref([])
 function blah() {
-  gooddata.value=[]
+  gooddata.value = []
+  usedata.value = []
+  labels.value = []
+  routes.value = []
 }
 onBeforeMount(() => {
   test()
-  setInterval(blah, 4500)
+  setInterval(blah, 5000)
   setInterval(test, 5000)
 
 })

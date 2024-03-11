@@ -1,8 +1,9 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import DataFetch from './components/DataFetch.vue';
-import { usedata } from './stores/store';
+import { usedata, routes } from './stores/store';
 </script>
+
 
 <template>
   <DataFetch/>
