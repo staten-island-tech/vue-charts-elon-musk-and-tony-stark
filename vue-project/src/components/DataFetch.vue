@@ -1,16 +1,17 @@
 <template>
-  <div>
-  </div>
+  <div></div>
 </template>
 
 <script setup>
 import GtfsRealtimeBindings from 'gtfs-realtime-bindings'
 import { onBeforeMount } from 'vue'
-import { usedata } from '@/stores/store';
-import { ref } from 'vue';
+import { usedata } from '@/stores/store'
+import { ref } from 'vue'
 const data = ref([])
 async function test() {
   ;(async () => {
+    gooddata.value = []
+    usedata.value = []
     try {
       const response = await fetch(
         'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-bdfm',
@@ -32,17 +33,15 @@ async function test() {
       data.value = feed.entity
       console.log(data.value)
 
-      
-      data.value.forEach((el) =>{
-     if (el.hasOwnProperty("vehicle")) {
-        gooddata.value.push(el)
-        } 
-     }
-      )
+      data.value.forEach((el) => {
+        if (Object.prototype.hasOwnProperty.call(el, 'vehicle')) {
+          gooddata.value.push(el)
+        }
+      })
       console.log(gooddata.value)
       gooddata.value.forEach((el) => {
-      usedata.value.push(el)
-     })
+        usedata.value.push(el)
+      })
       console.log(usedata.value)
     } catch (error) {
       console.log(error)
@@ -50,14 +49,10 @@ async function test() {
   })()
 }
 const gooddata = ref([])
-function blah() {
-  gooddata.value=[]
-}
+
 onBeforeMount(() => {
   test()
-  setInterval(blah, 4500)
   setInterval(test, 5000)
-
 })
 </script>
 

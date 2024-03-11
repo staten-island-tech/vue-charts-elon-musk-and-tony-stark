@@ -1,13 +1,14 @@
 <template>
-    <div>
+  <div>
+    <div v-for="item in usedata" :key="item">
+      <h2>{{ item.vehicle.trip.routeId }}</h2>
+      {{ item }}
     </div>
+  </div>
 </template>
 
 <script setup>
-import DataFetch from '@/components/DataFetch.vue';
-
+import { usedata } from '@/stores/store'
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>

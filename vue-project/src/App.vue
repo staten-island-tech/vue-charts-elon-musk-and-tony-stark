@@ -1,8 +1,7 @@
 <script setup>
 import DataFetch from './components/DataFetch.vue'
 import NavBar from './components/NavBar.vue'
-import { RouterLink, RouterView } from 'vue-router'
-import { usedata } from './stores/store';
+import { RouterView } from 'vue-router'
 </script>
 
 <template>
