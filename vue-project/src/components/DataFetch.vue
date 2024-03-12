@@ -3,56 +3,11 @@
 </template>
 
 <script setup>
-import GtfsRealtimeBindings from 'gtfs-realtime-bindings'
-import { onBeforeMount } from 'vue'
-import { usedata } from '@/stores/store'
-import { ref } from 'vue'
-const data = ref([])
-async function test() {
-  ;(async () => {
-    gooddata.value = []
-    usedata.value = []
-    try {
-      const response = await fetch(
-        'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-bdfm',
-        {
-          headers: {
-            'x-api-key': 'Lbc0gTUOwm8GvqZgMmu2t3MEktcvreZr8wiuihJn'
-            // replace with your GTFS-realtime source's auth token
-            // e.g. x-api-key is the header value used for NY's MTA GTFS APIs
-          }
-        }
-      )
-      if (!response.ok) {
-        const error = new Error(`${response.url}: ${response.status} ${response.statusText}`)
-        error.response = response
-        throw error
-      }
-      const buffer = await response.arrayBuffer()
-      const feed = GtfsRealtimeBindings.transit_realtime.FeedMessage.decode(new Uint8Array(buffer))
-      data.value = feed.entity
-      console.log(data.value)
+import { onMounted } from 'vue'
+import { fetchData } from '@/stores/store';
 
-      data.value.forEach((el) => {
-        if (Object.prototype.hasOwnProperty.call(el, 'vehicle')) {
-          gooddata.value.push(el)
-        }
-      })
-      console.log(gooddata.value)
-      gooddata.value.forEach((el) => {
-        usedata.value.push(el)
-      })
-      console.log(usedata.value)
-    } catch (error) {
-      console.log(error)
-    }
-  })()
-}
-const gooddata = ref([])
-
-onBeforeMount(() => {
-  test()
-  setInterval(test, 5000)
+onMounted(() => {
+  fetchData()
 })
 </script>
 

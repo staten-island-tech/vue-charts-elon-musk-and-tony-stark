@@ -2,10 +2,13 @@
   <nav>
     <RouterLink class="button" to="/">Home</RouterLink>
     <RouterLink class="button" to="/graphs">Graphs</RouterLink>
+    <button class="button" @click="fetchData">Refresh Data</button>
   </nav>
 </template>
 
-<script setup></script>
+<script setup>
+import { fetchData } from '@/stores/store';
+</script>
 
 <style lang="css" scoped>
 
