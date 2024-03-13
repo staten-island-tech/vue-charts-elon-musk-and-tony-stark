@@ -43,18 +43,23 @@ async function test() {
       console.log(usedata.value.length)
       usedata.value.forEach((el) => {
    labels.value.push(el.vehicle.trip.routeId)
+   
       })
       labels.value.forEach((el) => {
+        
         if (el === "B") {
-          routes.value[0] ++
+          routes.value.datasets[0].data[0] ++
         } else if (el === "F") {
-          routes.value[1] ++
+          routes.value.datasets[0].data[1] ++
         } else if (el === "D") {
-          routes.value[2] ++
+          routes.value.datasets[0].data[2] ++
         } else {
-          routes.value[3] ++
+          routes.value.datasets[0].data[3] ++
         }
-    })
+        
+      })
+      console.log(routes.value.datasets[0].data)
+
     } catch (error) {
       console.log(error)
       process.exit(1)
@@ -66,7 +71,8 @@ function blah() {
   gooddata.value = []
   usedata.value = []
   labels.value = []
-  routes.value = []
+  routes.value.datasets[0].data = [0, 0, 0, 0]
+  
 }
 onBeforeMount(() => {
   test()
