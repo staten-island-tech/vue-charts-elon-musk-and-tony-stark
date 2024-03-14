@@ -31,9 +31,9 @@ export const fetchData = async function () {
       console.log(data.value)
 
       data.value.forEach((el) => {
-        // if (Object.prototype.hasOwnProperty.call(el, 'vehicle')) {
+        if (Object.prototype.hasOwnProperty.call(el, 'vehicle')) {
           gooddata.value.push(el)
-        // }
+        }
       })
       console.log(gooddata.value)
       gooddata.value.forEach((el) => {
