@@ -1,5 +1,6 @@
 <template>
   <div>
+  
   </div>
 </template>
 
@@ -8,6 +9,10 @@ import GtfsRealtimeBindings from 'gtfs-realtime-bindings'
 import { onBeforeMount } from 'vue'
 import { usedata, labels,routes } from '@/stores/store';
 import { ref } from 'vue';
+import { Bar } from 'vue-chartjs'
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+
 const data = ref([])
 async function test() {
   ;(async () => {
@@ -48,17 +53,18 @@ async function test() {
       labels.value.forEach((el) => {
         
         if (el === "B") {
-          routes.value.datasets[0].data[0] ++
+          routes[0]++
         } else if (el === "F") {
-          routes.value.datasets[0].data[1] ++
+          routes[1]++
         } else if (el === "D") {
-          routes.value.datasets[0].data[2] ++
+          routes[2]++
         } else {
-          routes.value.datasets[0].data[3] ++
+          routes[3]++
         }
         
+        
       })
-      console.log(routes.value.datasets[0].data)
+      console.log(routes)
 
     } catch (error) {
       console.log(error)
@@ -71,7 +77,7 @@ function blah() {
   gooddata.value = []
   usedata.value = []
   labels.value = []
-  routes.value.datasets[0].data = [0, 0, 0, 0]
+  routes.value = [0, 0, 0, 0]
   
 }
 onBeforeMount(() => {
@@ -80,6 +86,7 @@ onBeforeMount(() => {
   setInterval(test, 5000)
 
 })
+
 </script>
 
 <style lang="css" scoped></style>
