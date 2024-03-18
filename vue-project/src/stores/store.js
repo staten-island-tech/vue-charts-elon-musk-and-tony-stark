@@ -11,7 +11,7 @@ export const fetchData = async function () {
     usedata.value = []
     try {
       const response = await fetch(
-        'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-bdfm',
+        'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-si',
         {
           headers: {
             'x-api-key': 'Lbc0gTUOwm8GvqZgMmu2t3MEktcvreZr8wiuihJn'
@@ -30,9 +30,10 @@ export const fetchData = async function () {
       data.value = feed.entity
       console.log(data.value)
 
-      data.value.forEach((el) => {
+      data.value.forEach((el, i) => {
         if (Object.prototype.hasOwnProperty.call(el, 'vehicle')) {
-          gooddata.value.push(el)
+          let pushed = {vehicle: el, tripUpdate: data.value[i-1]}
+          gooddata.value.push(pushed)
         }
       })
       console.log(gooddata.value)
