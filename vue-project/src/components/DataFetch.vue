@@ -1,6 +1,5 @@
 <template>
   <div>
-  
   </div>
 </template>
 
@@ -12,7 +11,6 @@ import { ref } from 'vue';
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
-wowowowowow
 const data = ref([])
 async function test() {
   ;(async () => {
@@ -31,7 +29,6 @@ async function test() {
         const error = new Error(`${response.url}: ${response.status} ${response.statusText}`)
         error.response = response
         throw error
-        process.exit(1)
       }
       const buffer = await response.arrayBuffer()
       const feed = GtfsRealtimeBindings.transit_realtime.FeedMessage.decode(new Uint8Array(buffer))
@@ -53,22 +50,21 @@ async function test() {
       labels.value.forEach((el) => {
         
         if (el === "B") {
-          routes[0]++
+          routes.value[0]++
         } else if (el === "F") {
-          routes[1]++
+          routes.value[1]++
         } else if (el === "D") {
-          routes[2]++
+          routes.value[2]++
         } else {
-          routes[3]++
+          routes.value[3]++
         }
         
         
       })
-      console.log(routes)
+      console.log(routes.value)
 
     } catch (error) {
       console.log(error)
-      process.exit(1)
     }
   })()
 }
