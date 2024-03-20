@@ -7,6 +7,7 @@
   import { Bar } from 'vue-chartjs'
   import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
   import { routes } from '@/stores/store'
+  import { ref } from 'vue'
   ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
   
   export default {
@@ -21,15 +22,20 @@
             {
               label: 'Data One',
               backgroundColor: '#f87979',
-              data: routes.value
+              data: ref(routes.value)
             }
           ]
         }
       }
     },
     methods: {
-      reload() {
-        this.key +++ 1
+      async reload() {
+        location.reload()
+        function rereload() {
+          this.key += 1
+        console.log("reloaded")
+        }
+        window.onload = rereload()
       }
     }
   }
