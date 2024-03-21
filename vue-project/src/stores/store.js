@@ -2,7 +2,7 @@ import { ref } from 'vue'
 import GtfsRealtimeBindings from 'gtfs-realtime-bindings'
 
 export const usedata = ref([])
-export const fetchData = async function () {
+export const fetchData = async function (urlInput) {
   console.log('refreshing data')
   const data = ref([])
   const gooddata = ref([])
@@ -11,7 +11,7 @@ export const fetchData = async function () {
     usedata.value = []
     try {
       const response = await fetch(
-        'https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-si',
+        urlInput,
         {
           headers: {
             'x-api-key': 'Lbc0gTUOwm8GvqZgMmu2t3MEktcvreZr8wiuihJn'
@@ -45,4 +45,10 @@ export const fetchData = async function () {
       console.log(error)
     }
   })()
+}
+
+export async function getPosition(options){
+  return new Promise((resolve, reject) => 
+      navigator.geolocation.getCurrentPosition(resolve, reject, options)
+  );
 }

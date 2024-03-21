@@ -5,7 +5,7 @@ import { onMounted } from 'vue'
 import { fetchData } from '@/stores/store';
 
 onMounted(() => {
-  fetchData()
+  fetchData('https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-si')
 })
 </script>
 
