@@ -13,6 +13,7 @@
   export default {
     name: 'BarChart',
     components: { Bar },
+    
     data() {
       return {
         key: 0,
@@ -30,12 +31,11 @@
     },
     methods: {
       async reload() {
-        location.reload()
-        function rereload() {
+
+        
           this.key += 1
         console.log("reloaded")
-        }
-        window.onload = rereload()
+        
       }
     }
   }
