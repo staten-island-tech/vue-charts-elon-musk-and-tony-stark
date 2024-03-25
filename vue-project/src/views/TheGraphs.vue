@@ -33,7 +33,17 @@
       async reload() {
 
         
-          this.key += 1
+        this.key += 1
+        this.chartData = {
+          labels: [ 'B', 'F', 'D', 'M'],
+          datasets: [
+            {
+              label: 'Data One',
+              backgroundColor: '#f3f',
+              data: ref(routes.value)
+            }
+          ]
+        }
         console.log("reloaded")
         
       }
