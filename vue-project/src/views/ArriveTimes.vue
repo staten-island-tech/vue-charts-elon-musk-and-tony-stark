@@ -17,7 +17,6 @@
 import { usedata as data } from '@/stores/store'
 import { stops } from '@/stores/google_transit/stops'
 import { routes } from '@/stores/google_transit/routes'
-import { getPosition } from '@/stores/store';
 
 const timeToStop = function(time) {
   let currentTime = Date.now()
@@ -32,17 +31,7 @@ const toSeconds = function (digit) {
   return Math.round(digit / 1000)
 }
 
-const findNearestCoords = async function (){
-const position = await getPosition({
-    enableHighAccuracy: true,
-  });
-  console.log(position);
-  const coords = {
-    lat: position.coords.latitude,
-    long: position.coords.longitude,
-  };
-  
-}
+
 </script>
 
 <style lang="scss" scoped></style>
