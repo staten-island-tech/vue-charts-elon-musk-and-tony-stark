@@ -6,7 +6,7 @@
 <script setup>
 import GtfsRealtimeBindings from 'gtfs-realtime-bindings'
 import { onBeforeMount } from 'vue'
-import { usedata, labels,routes } from '@/stores/store';
+import { usedata, labels,routes} from '@/stores/store';
 import { ref } from 'vue';
 import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'

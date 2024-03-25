@@ -1,6 +1,6 @@
 <template>
     <Bar :data="chartData" :key="key"/>
-    <button @click="reload">Reload Graph</button>
+    <button @click="reload">Load Graph</button>
   </template>
   
   <script>
@@ -13,7 +13,7 @@
   export default {
     name: 'BarChart',
     components: { Bar },
-    
+
     data() {
       return {
         key: 0,
@@ -31,8 +31,6 @@
     },
     methods: {
       async reload() {
-
-        
         this.key += 1
         this.chartData = {
           labels: [ 'B', 'F', 'D', 'M'],
@@ -47,6 +45,14 @@
         console.log("reloaded")
         
       }
+    },
+    watch: {
+      routes() {
+        this.reload()  
+      }
+    },
+    mounted() {
+      this.reload()
     }
   }
   </script>
