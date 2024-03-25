@@ -1,6 +1,6 @@
 <template>
     <Bar :data="chartData" :key="key"/>
-    <button @click="reload">Reload????</button>
+    <button @click="reload">Reload Graph</button>
   </template>
   
   <script>
@@ -39,7 +39,7 @@
           datasets: [
             {
               label: 'Data One',
-              backgroundColor: '#f3f',
+              backgroundColor: '#f87979',
               data: ref(routes.value)
             }
           ]
