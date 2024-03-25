@@ -35,10 +35,11 @@ export const fetchData = async function (urlInput) {
           let pushed = {vehicle: el, tripUpdate: data.value[i-1]}
           gooddata.value.push(pushed)
         }
-      })
+      })  
       console.log(gooddata.value)
       gooddata.value.forEach((el) => {
         usedata.value.push(el)
+        console.log(`pushing data to USE`)
       })
       console.log(usedata.value)
     } catch (error) {

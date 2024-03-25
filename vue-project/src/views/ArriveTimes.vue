@@ -1,6 +1,7 @@
 <template>
   <div>
     <div v-for="item in data" :key="item.id">
+      <h2>{{ item.vehicle.vehicle.trip.routeId }}</h2>
       <h2>{{ routes[item.vehicle.vehicle.trip.routeId].route_long_name }}</h2>
       <h2>Currently stopped at: {{ stops[item.vehicle.vehicle.stopId].stop_name }}</h2>
 
@@ -18,12 +19,11 @@ import { usedata as data } from '@/stores/store'
 import { stops } from '@/stores/google_transit/stops'
 import { routes } from '@/stores/google_transit/routes'
 
+
 const timeToStop = function(time) {
   let currentTime = Date.now()
   let currentTimeSeconds = toSeconds(currentTime)
-  console.log(`time inputted ${time} - ${currentTimeSeconds}`)
   let timeLeftUntilStop = time - currentTimeSeconds
-  console.log(timeLeftUntilStop)
   return Math.round(timeLeftUntilStop / 60)
 }
 

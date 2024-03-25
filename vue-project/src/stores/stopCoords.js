@@ -13,8 +13,8 @@ const findNearestCoords = async function () {
 }
 
 const calcDistance = function(pointOne,pointTwo) {
-    let differenceX = pointOne.latitude - pointTwo.latitude
-    let differenceY = pointOne.longitude - pointTwo.longitude
+    let differenceX = Math.abs(pointOne.latitude - pointTwo.latitude)
+    let differenceY = Math.abs(pointOne.longitude - pointTwo.longitude)
     let distanceBetween = Math.sqrt(differenceX^2 + differenceY^2)
     return distanceBetween
 }
