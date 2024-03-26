@@ -53,3 +53,5 @@ export async function getPosition(options){
       navigator.geolocation.getCurrentPosition(resolve, reject, options)
   );
 }
+export const labels = ref([])
+export const routes = ref([0,0,0,0])
