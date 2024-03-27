@@ -6,8 +6,9 @@
       <h2>Currently stopped at: {{ stops[item.vehicle.vehicle.stopId].stop_name }}</h2>
 
       <h3 v-for="stop in item.tripUpdate.tripUpdate.stopTimeUpdate" :key="stop.arrival.time">
-        Arrives at {{ stops[stop.stopId].stop_name }} in
-        {{ timeToStop(stop.arrival.time) }} minutes.
+        <h3 v-if="stops[stop.stopId]">
+          Arrives at {{ stops[stop.stopId].stop_name }} in {{ timeToStop(stop.arrival.time) }} minutes.
+        </h3>
       </h3>
       <h2>{{ item }}</h2>
     </div>
@@ -19,8 +20,7 @@ import { usedata as data } from '@/stores/store'
 import { stops } from '@/stores/google_transit/stops'
 import { routes } from '@/stores/google_transit/routes'
 
-
-const timeToStop = function(time) {
+const timeToStop = function (time) {
   let currentTime = Date.now()
   let currentTimeSeconds = toSeconds(currentTime)
   let timeLeftUntilStop = time - currentTimeSeconds
@@ -30,8 +30,6 @@ const timeToStop = function(time) {
 const toSeconds = function (digit) {
   return Math.round(digit / 1000)
 }
-
-
 </script>
 
 <style lang="scss" scoped></style>
