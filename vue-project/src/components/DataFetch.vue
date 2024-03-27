@@ -62,7 +62,7 @@ async function test() {
         
       })
       console.log(routes.value)
-
+      console.log(usedata.value)
     } catch (error) {
       console.log(error)
     }

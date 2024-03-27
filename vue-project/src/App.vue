@@ -15,8 +15,10 @@ function reload() {
 
     <div class="wrapper flex flex-row justify-center m-auto w-full">
       <nav class=" flex justify-center m-auto">
-        <RouterLink to="/" class=" mr-10 bg-slate-300">Home</RouterLink>
-        <RouterLink to="/graphs" class=" bg-slate-300"> Graphs</RouterLink>
+        <button class="mr-10 bg-slate-300 border-2 border-black hover:bg-slate-600">  <RouterLink to="/" class=" ">Home</RouterLink> </button>
+
+        <button class="bg-slate-300 border-2 border-black hover:bg-slate-600"> <RouterLink to="/graphs" class="]"> Graphs</RouterLink></button>
+
       </nav>
     </div>
   </header>

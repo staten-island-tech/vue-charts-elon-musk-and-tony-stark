@@ -1,22 +1,24 @@
 <template>
   <div class="header flex flex-col w-1/2 justify-center m-auto">
-      <h1 class=" text-3xl flex justify-center m-auto">Click button on page load to load graphs and update data</h1>
-  <button @click="rereload" class="w-1/2 justify-center m-auto mt-4 border-black border-4 bg-red-400 hover:bg-red-600">Load Graph</button>
+      <h1 class=" text-3xl flex justify-center m-auto"></h1>
   </div>
-    <Bar :data="chartData" :options="chartOptions" :key="key" class="h-[1x]"/>
+    <Bar :data="chartData" :options="chartOptions" :key="key" class=" mb-36"/>
+    <Doughnut :data="chartData2"/>
   </template>
   
   <script>
-  import { Bar } from 'vue-chartjs'
-  import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
+  import { Bar, Doughnut } from 'vue-chartjs'
+  import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement } from 'chart.js'
   import { routes } from '@/stores/store'
   import { ref } from 'vue'
-  ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+  ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement)
   
   export default {
     name: 'BarChart',
-    components: { Bar },
-
+    components: { Bar, Doughnut },
+    mounted() {
+      this.rereload()
+    },
     data() {
       return {
         key: 0,
@@ -24,15 +26,25 @@
           labels: [ 'B', 'F', 'D', 'M'],
           datasets: [
             {
-              label: 'Data One',
+              label: 'Number of Routes for the B,F,D,M at any given time',
               backgroundColor: '#f87979',
               data: ref(routes.value)
             }
           ]
         },
+        chartData2: {
+          labels: [ 'B', 'F', 'D', 'M'],
+          datasets: [
+            {
+              label: 'Most common time to stop per line',
+              backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
+              data: [1,2,3,4]
+            }
+          ]
+        },
         chartOptions: {
-          maintainAspectRatio: false,
-          aspectRatio: 1,
+          maintainAspectRatio: true,
+          aspectRatio: 16/9,
           responsive: true,
         }
       }
@@ -45,7 +57,7 @@
       },
       rereload() {
         this.reload()
-        setInterval(this.reload, 5000)
+        setInterval(this.reload, 7000)
       }
     },
     watch: {
