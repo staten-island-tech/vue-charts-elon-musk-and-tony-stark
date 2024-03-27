@@ -2,7 +2,7 @@
   <nav>
     <RouterLink class="button" to="/">Home</RouterLink>
     <RouterLink class="button" to="/graphs">Graphs</RouterLink>
-    <button class="button" @click="fetchData">Refresh Data</button>
+    <button class="button" @click="fetchData('https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-bdfm')">Refresh Data</button>
   </nav>
 </template>
 

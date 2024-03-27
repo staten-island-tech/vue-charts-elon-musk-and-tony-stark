@@ -1,16 +1,14 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-import DataFetch from './components/DataFetch.vue';
-import { usedata, routes } from './stores/store';
 function reload() {
   location.reload()
 }
+import NavBar from './components/NavBar.vue'
+
 </script>
 
 
 <template>
-  <DataFetch />
-
   <header>
     <NavBar />
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
@@ -23,7 +21,6 @@ function reload() {
       </nav>
     </div>
   </header>
-
   <RouterView />
 </template>
 
