@@ -55,3 +55,13 @@ export async function getPosition(options){
       navigator.geolocation.getCurrentPosition(resolve, reject, options)
   );
 }
+
+export const timeToStop = function (time) {
+  let currentTime = Date.now()
+  let currentTimeSeconds = toSeconds(currentTime)
+  let timeLeftUntilStop = time - currentTimeSeconds
+  return Math.round(timeLeftUntilStop / 60)
+}
+const toSeconds = function (digit) {
+  return Math.round(digit / 1000)
+}

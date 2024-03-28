@@ -50,6 +50,7 @@ import { stops } from '@/stores/google_transit/stops'
 import { routes } from '@/stores/google_transit/routes'
 import { onBeforeUpdate, onBeforeMount, ref } from 'vue'
 import { fetchData } from '@/stores/store'
+import { timeToStop } from '@/stores/store'
 
 const select = ref('')
 
@@ -67,16 +68,9 @@ const sort = function (route) {
   return sorted
 }
 
-const timeToStop = function (time) {
-  let currentTime = Date.now()
-  let currentTimeSeconds = toSeconds(currentTime)
-  let timeLeftUntilStop = time - currentTimeSeconds
-  return Math.round(timeLeftUntilStop / 60)
-}
 
-const toSeconds = function (digit) {
-  return Math.round(digit / 1000)
-}
+
+
 </script>
 
 <style lang="scss" scoped></style>
