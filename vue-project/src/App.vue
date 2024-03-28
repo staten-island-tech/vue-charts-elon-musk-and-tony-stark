@@ -10,14 +10,13 @@ import NavBar from './components/NavBar.vue'
 
 <template>
   <header>
-    <NavBar />
-    <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
 
-    <div class="wrapper">
-      <button @click="reload">Update Graph!</button>
-      <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/graphs">Graphs</RouterLink>
+    <div class="wrapper flex flex-row justify-center m-auto w-full">
+      <nav class=" flex justify-center m-auto">
+        <button class="mr-10 bg-slate-300 border-2 border-black hover:bg-slate-600">  <RouterLink to="/" class=" ">Home</RouterLink> </button>
+
+        <button class="bg-slate-300 border-2 border-black hover:bg-slate-600"> <RouterLink to="/graphs" class="]"> Graphs</RouterLink></button>
+
       </nav>
     </div>
   </header>
