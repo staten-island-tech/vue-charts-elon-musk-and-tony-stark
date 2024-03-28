@@ -10,7 +10,7 @@
     import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
     import { routes } from '@/stores/store'
     import { ref } from 'vue'
-    ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
+    (Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
     
     export default {
       name: 'BarChart',

@@ -43,6 +43,25 @@ export const fetchData = async function (urlInput) {
         usedata.value.push(el)
         console.log(`pushing data to USE`)
       })
+      usedata.value.forEach((el) => {
+        labels.value.push(el.vehicle.trip.routeId)
+        
+           })
+           labels.value.forEach((el) => {
+             
+             if (el === "B") {
+               routes.value[0]++
+             } else if (el === "F") {
+               routes.value[1]++
+             } else if (el === "D") {
+               routes.value[2]++
+             } else {
+               routes.value[3]++
+             }
+             
+             
+           })
+           console.log(routes.value)
       console.log(usedata.value)
     } catch (error) {
       console.log(error)
