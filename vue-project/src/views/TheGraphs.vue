@@ -1,9 +1,13 @@
 <template>
   <div class="header flex flex-col w-1/2 justify-center m-auto">
-      <h1 class=" text-3xl flex justify-center m-auto"></h1>
+      <h1 class=" text-3xl flex justify-center m-auto mb-10 border-4 border-green-500 bg-yellow-200">We love Graphs!</h1>
   </div>
-    <Bar :data="chartData" :options="chartOptions" :key="key" class=" mb-36"/>
-    <Doughnut :data="chartData2"/>
+  <div class="graphs grid grid-cols-2 justify-around border-b-">
+    <div class="b col-start-1 flex justify-center m-auto w-full p-10 mb-[-18%]"><Bar :data="chartData" :options="chartOptions" :key="key"/></div>
+    <div class="d col-start-2 h-full flex justify-center m-auto w-full p-10 mb-[-3%]"> <Doughnut :data="chartData2"/></div>
+   
+  </div>
+    
   </template>
   
   <script>
@@ -26,8 +30,8 @@
           labels: [ 'B', 'F', 'D', 'M'],
           datasets: [
             {
-              label: 'Number of Routes for the B,F,D,M at any given time',
-              backgroundColor: '#f87979',
+              label: 'Curret number of trips for the B, F, D, and M',
+              backgroundColor: '#ff6319',
               data: ref(routes.value)
             }
           ]
@@ -58,11 +62,6 @@
       rereload() {
         this.reload()
         setInterval(this.reload, 7000)
-      }
-    },
-    watch: {
-      routes() {
-        this.reload()  
       }
     },
   }

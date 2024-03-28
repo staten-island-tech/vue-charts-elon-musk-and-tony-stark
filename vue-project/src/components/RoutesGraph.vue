@@ -2,6 +2,7 @@
     <div class="header flex flex-col w-1/2 justify-center m-auto">
         <h1 class=" text-3xl flex justify-center m-auto"></h1>
     </div>
+    <div class="chart"></div>
       <Bar :data="chartData" :options="chartOptions" :key="key" class=""/>
     </template>
     

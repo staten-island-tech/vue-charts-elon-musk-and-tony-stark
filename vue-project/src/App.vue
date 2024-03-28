@@ -14,10 +14,10 @@ function reload() {
   <header>
 
     <div class="wrapper flex flex-row justify-center m-auto w-full">
-      <nav class=" flex justify-center m-auto">
-        <button class="mr-10 bg-slate-300 border-2 border-black hover:bg-slate-600">  <RouterLink to="/" class=" ">Home</RouterLink> </button>
+      <nav class="grid grid-cols-2 justify-center m-auto">
+        <button class="col-start-1 w-1/4 justify-center m-auto bg-slate-300 border-2 border-black hover:bg-slate-600">  <RouterLink to="/" class="w-full">Home</RouterLink> </button>
 
-        <button class="bg-slate-300 border-2 border-black hover:bg-slate-600"> <RouterLink to="/graphs" class="]"> Graphs</RouterLink></button>
+        <button class=" col-start-2 w-1/4 justify-center m-auto bg-slate-300 border-2 border-black hover:bg-slate-600"> <RouterLink to="/graphs" class="w-full"> Graphs</RouterLink></button>
 
       </nav>
     </div>
