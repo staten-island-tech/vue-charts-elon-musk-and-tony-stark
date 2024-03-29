@@ -59,7 +59,7 @@ export default {
       console.log('reloaded')
     },
     rereload() {
-      setTimeout(this.reload,500)
+      setTimeout(this.reload,)
       setInterval(this.reload, 5000)
     }
   },
