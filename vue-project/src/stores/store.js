@@ -66,7 +66,6 @@ const toSeconds = function (digit) {
 export const dataForChart = function () {
   const returnedData = [0,0,0,0]
   const data = usedata.value
-  console.log(data)
   data.forEach((piece) => {
     switch (piece.vehicle.vehicle.trip.routeId) {
       case 'B':
@@ -86,7 +85,6 @@ export const dataForChart = function () {
         break
     }
   })
-  console.log(returnedData)
 
   return returnedData
 }
@@ -98,13 +96,11 @@ function count(piece) {
   return count
 }
 function mostCommon(arr) {
-  console.log(`sorting ${arr}`)
   let mode = arr.reduce(
     (a, b, i, arr) =>
       arr.filter((v) => v === a).length >= arr.filter((v) => v === b).length ? a : b,
     null
   )
-  console.log('returning' + mode)
   if (mode == undefined) {
     return 0
   } else {
