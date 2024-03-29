@@ -1,4 +1,5 @@
 <template>
+  <div>{{ dataForChart(data) }}</div>
   <Doughnut id="my-chart-id" :options="chartOptions" :data="chartData" />
 </template>
 
@@ -13,56 +14,31 @@ import {
   CategoryScale,
   LinearScale
 } from 'chart.js'
-import { onMounted } from 'vue'
-import { usedata as data } from '@/stores/store'
-import { timeToStop } from '@/stores/store'
-
+import { usedata as data, dataForChart } from '@/stores/store'
+import { ref } from 'vue';
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
-
+const chartNumbers = ref(dataForChart(data))
 const chartData = {
   labels: ['B', 'F', 'D', 'M'],
   datasets: [
     {
       label: 'Most common time to stop per line',
       backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-      data: [1, 2, 3, 4]
+      data: chartNumbers.value
     }
   ]
 }
 
-let loaded = false
+
 
 const chartOptions = {
   maintainAspectRatio: true,
   aspectRatio: 16 / 9,
   responsive: true
 }
-onMounted(() => {
-    loaded = true
-})
 
-const dataForChart = function () {
-    const returnedData = []
-    data.forEach((piece) => {
-        switch (piece.vehicle.vehicle.trip.routeId){
-            case 'B':
-            let count = []
-            piece.tripUpdate.tripUpdate.stopTimeUpdate.forEach((stop) => { 
-                count.push(timeToStop(stop.arrival.time))
-            })
-            count
 
-            case 'D':
-            case 'F':
-            case 'M':
-        }
-    })
-}
-
-function mostCommon(arr) {
-
-}
 </script>
 
 <style lang="scss" scoped></style>
