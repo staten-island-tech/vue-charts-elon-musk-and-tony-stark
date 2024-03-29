@@ -15,7 +15,6 @@ import {
   LinearScale
 } from 'chart.js'
 import { usedata as data, dataForChart } from '@/stores/store'
-import { ref } from 'vue';
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 const chartNumbers = dataForChart(data)

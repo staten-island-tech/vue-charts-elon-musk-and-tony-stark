@@ -1,14 +1,9 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
-function reload() {
-  location.reload()
-}
-import NavBar from './components/NavBar.vue'
 import GtfsRealtimeBindings from 'gtfs-realtime-bindings'
 import { onBeforeMount } from 'vue'
 import { usedata, labels,routes} from '@/stores/store';
 import { ref } from 'vue';
-import { Bar } from 'vue-chartjs'
 import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js'
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 const data = ref([])
@@ -36,7 +31,7 @@ async function test() {
       const feed = GtfsRealtimeBindings.transit_realtime.FeedMessage.decode(new Uint8Array(buffer))
       data.value = feed.entity
       data.value.forEach((el) =>{
-     if (el.hasOwnProperty("vehicle")) {
+     if (Object.prototype.hasOwnProperty.call(el, "vehicle")) {
         gooddata.value.push(el)
         } 
      }
@@ -88,7 +83,6 @@ onBeforeMount(() => {
 
 //yi
 import { fetchData } from './stores/store'
-import { usedata as data } from './stores/store';
 
 onBeforeMount(() => {
   fetchData('https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-bdfm')
