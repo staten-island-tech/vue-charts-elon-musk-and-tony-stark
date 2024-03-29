@@ -3,11 +3,10 @@
       <h1 class=" text-3xl flex justify-center m-auto"></h1>
   </div>
     <Bar :data="chartData" :options="chartOptions" :key="key" class=" mb-36"/>
-    <Doughnut :data="chartData2"/>
   </template>
   
   <script>
-  import { Bar, Doughnut } from 'vue-chartjs'
+  import { Bar } from 'vue-chartjs'
   import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement } from 'chart.js'
   import { routes } from '@/stores/store'
   import { ref } from 'vue'
@@ -15,7 +14,7 @@
   
   export default {
     name: 'BarChart',
-    components: { Bar, Doughnut },
+    components: { Bar },
     mounted() {
       this.rereload()
     },
@@ -32,16 +31,6 @@
             }
           ]
         },
-        chartData2: {
-          labels: [ 'B', 'F', 'D', 'M'],
-          datasets: [
-            {
-              label: 'Most common time to stop per line',
-              backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-              data: [1,2,3,4]
-            }
-          ]
-        },
         chartOptions: {
           maintainAspectRatio: true,
           aspectRatio: 16/9,
@@ -52,6 +41,7 @@
     methods: {
        reload() {
         this.key += 1
+        console.log(`reloading ${routes.value}`)
         this.chartData.datasets[0].data = ref(routes.value)
         console.log("reloaded")
       },

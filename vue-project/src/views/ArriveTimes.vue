@@ -48,7 +48,7 @@
 import { usedata as data } from '@/stores/store'
 import { stops } from '@/stores/google_transit/stops'
 import { routes } from '@/stores/google_transit/routes'
-import { onBeforeUpdate, onBeforeMount, ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import { fetchData } from '@/stores/store'
 import { timeToStop } from '@/stores/store'
 

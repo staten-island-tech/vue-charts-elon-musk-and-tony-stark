@@ -44,8 +44,32 @@ export const fetchData = async function (urlInput) {
     } catch (error) {
       console.log(error)
     }
-  })()
+    usedata.value.forEach((el) => {
+      labels.value.push(el.vehicle.vehicle.trip.routeId)
+    })
+    labels.value.forEach((el) => {
+      if (el === 'B') {
+        routes.value[0]++
+      } else if (el === 'F') {
+        routes.value[1]++
+      } else if (el === 'D') {
+        routes.value[2]++
+      } else {
+        routes.value[3]++
+      }
+    })
+  })()  
 }
+
+const gooddata = ref([])
+function blah() {
+  gooddata.value = []
+  usedata.value = []
+  labels.value = []
+  routes.value = [0, 0, 0, 0]
+}
+
+setInterval(blah, 5000)
 
 export async function getPosition(options) {
   return new Promise((resolve, reject) =>
@@ -64,7 +88,7 @@ const toSeconds = function (digit) {
 }
 
 export const dataForChart = function () {
-  const returnedData = [0,0,0,0]
+  const returnedData = [0, 0, 0, 0]
   const data = usedata.value
   data.forEach((piece) => {
     switch (piece.vehicle.vehicle.trip.routeId) {
