@@ -17,7 +17,7 @@ import {
   LinearScale,
   ArcElement
 } from 'chart.js'
-import { routes } from '@/stores/store'
+import { fetchData, routes } from '@/stores/store'
 import { ref } from 'vue'
 import { doLabels } from '@/stores/store'
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, ArcElement)
@@ -51,6 +51,7 @@ export default {
   },
   methods: {
     reload() {
+      fetchData('https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-bdfm')
       doLabels(this.data);
       this.key += 1
       console.log(`reloading ${routes.value}`)

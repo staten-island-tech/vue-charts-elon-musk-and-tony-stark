@@ -43,12 +43,16 @@ export const fetchData = async function (urlInput) {
   } catch (error) {
     console.log(error)
   }
-
-  usedata.value.forEach((el) => {
+  function createlabels() {
+    labels.value = []
+    usedata.value.forEach((el) => {
     console.log(el)
     labels.value.push(el.vehicle.vehicle.trip.routeId)
   })
   console.log('routes' + routes.value)
+  }
+  createlabels()
+  
 }
 
 export async function getPosition(options) {
@@ -113,6 +117,7 @@ function mostCommon(arr) {
 }
 
 export function doLabels() {
+  routes.value= [0,0,0,0]
   labels.value.forEach((el) => {
     if (el === 'B') {
       routes.value[0]++
