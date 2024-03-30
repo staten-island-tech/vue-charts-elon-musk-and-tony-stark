@@ -1,7 +1,6 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import { fetchData } from './stores/store'
-import { onBeforeMount } from 'vue'
 import { usedata as data } from './stores/store';
 
 </script>
