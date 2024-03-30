@@ -1,17 +1,19 @@
 <template>
   <div>
-    <h2>Selected: {{ select }}</h2>
-    <select v-model="select" name="" id="select">
-      <option disabled value="">--Select a Train--</option>
-      <option value="">All</option>
-      <option>B</option>
-      <option>D</option>
-      <option>F</option>
-      <option>M</option>
-    </select>
+    <div class="select-wrap">
+      <label for="select">Selected: {{ select }}</label>
+      <select v-model="select" name="select" id="select">
+        <option disabled value="">--Select a Train--</option>
+        <option value="">All</option>
+        <option>B</option>
+        <option>D</option>
+        <option>F</option>
+        <option>M</option>
+      </select>
+    </div>
     <div v-if="select === ''">
       <div v-for="item in data" :key="item.id">
-        <div v-if="stops[item.vehicle.vehicle.stopId]">
+        <div v-if="stops[item.vehicle.vehicle.stopId]" class="card">
           <h2>{{ item.vehicle.vehicle.trip.routeId }}</h2>
           <h2>{{ routes[item.vehicle.vehicle.trip.routeId].route_long_name }}</h2>
           <h2>Currently stopped at: {{ stops[item.vehicle.vehicle.stopId].stop_name }}</h2>
@@ -22,24 +24,26 @@
               {{ timeToStop(stop.arrival.time) }} minutes.
             </h3>
           </h3>
-          <h2>{{ item }}</h2>
         </div>
       </div>
     </div>
-    <div v-else v-for="item in sort(select)" :key="item.id">
-      <div v-if="stops[item.vehicle.vehicle.stopId]">
-        <h2>{{ item.vehicle.vehicle.trip.routeId }}</h2>
-        <h2>{{ routes[item.vehicle.vehicle.trip.routeId].route_long_name }}</h2>
-        <h2>Currently stopped at: {{ stops[item.vehicle.vehicle.stopId].stop_name }}</h2>
-
-        <h3 v-for="stop in item.tripUpdate.tripUpdate.stopTimeUpdate" :key="stop.arrival.time">
-          <h3 v-if="stops[stop.stopId]">
-            Arrives at {{ stops[stop.stopId].stop_name }} in
-            {{ timeToStop(stop.arrival.time) }} minutes.
-          </h3>
-        </h3>
-        <h2>{{ item }}</h2>
+    <div v-else>
+      <div v-if="sort(select)[0]">
+        <div v-for="item in sort(select)" :key="item.id">
+          <div v-if="stops[item.vehicle.vehicle.stopId]" class="card">
+            <h2>{{ item.vehicle.vehicle.trip.routeId }}</h2>
+            <h2>{{ routes[item.vehicle.vehicle.trip.routeId].route_long_name }}</h2>
+            <h2>Currently stopped at: {{ stops[item.vehicle.vehicle.stopId].stop_name }}</h2>
+            <h3 v-for="stop in item.tripUpdate.tripUpdate.stopTimeUpdate" :key="stop.arrival.time">
+              <h3 v-if="stops[stop.stopId]">
+                Arrives at {{ stops[stop.stopId].stop_name }} in
+                {{ timeToStop(stop.arrival.time) }} minutes.
+              </h3>
+            </h3>
+          </div>
+        </div>
       </div>
+      <div v-else class="text-center">Information Not Available!</div>
     </div>
   </div>
 </template>
@@ -48,7 +52,7 @@
 import { usedata as data } from '@/stores/store'
 import { stops } from '@/stores/google_transit/stops'
 import { routes } from '@/stores/google_transit/routes'
-import { onBeforeUpdate, onBeforeMount, ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
 import { fetchData } from '@/stores/store'
 import { timeToStop } from '@/stores/store'
 
@@ -67,11 +71,27 @@ const sort = function (route) {
   })
   return sorted
 }
-
-
-
-
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="css" scoped>
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+.card {
+  border: solid black 5px;
+  width: 90vw;
+  margin: auto;
+  margin-bottom: 1%;
+  padding: 1%;
+}
+
+.select-wrap {
+  text-align: center;
+}
+</style>
 @/stores/google_transit/stops

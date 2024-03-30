@@ -5,65 +5,47 @@ export const usedata = ref([])
 export const labels = ref([])
 export const routes = ref([0, 0, 0, 0])
 export const fetchData = async function (urlInput) {
-  console.log('refreshing data')
   const data = ref([])
   const gooddata = ref([])
-  ;(async () => {
-    gooddata.value = []
-    usedata.value = []
-    try {
-      const response = await fetch(urlInput, {
-        headers: {
-          'x-api-key': 'Lbc0gTUOwm8GvqZgMmu2t3MEktcvreZr8wiuihJn'
-          // replace with your GTFS-realtime source's auth token
-          // e.g. x-api-key is the header value used for NY's MTA GTFS APIs
-        }
-      })
-      if (!response.ok) {
-        const error = new Error(`${response.url}: ${response.status} ${response.statusText}`)
-        error.response = response
-        throw error
+  gooddata.value = []
+  usedata.value = []
+  try {
+    const response = await fetch(urlInput, {
+      headers: {
+        'x-api-key': 'Lbc0gTUOwm8GvqZgMmu2t3MEktcvreZr8wiuihJn'
+        // replace with your GTFS-realtime source's auth token
+        // e.g. x-api-key is the header value used for NY's MTA GTFS APIs
       }
-      const buffer = await response.arrayBuffer()
-      const feed = GtfsRealtimeBindings.transit_realtime.FeedMessage.decode(new Uint8Array(buffer))
-      data.value = feed.entity
-      console.log(data.value)
-
-      data.value.forEach((el, i) => {
-        if (Object.prototype.hasOwnProperty.call(el, 'vehicle')) {
-          let pushed = { vehicle: el, tripUpdate: data.value[i - 1] }
-          gooddata.value.push(pushed)
-        }
-      })
-      console.log(gooddata.value)
-      gooddata.value.forEach((el) => {
-        usedata.value.push(el)
-        console.log(`pushing data to USE`)
-      })
-      usedata.value.forEach((el) => {
-        labels.value.push(el.vehicle.trip.routeId)
-        
-           })
-           labels.value.forEach((el) => {
-             
-             if (el === "B") {
-               routes.value[0]++
-             } else if (el === "F") {
-               routes.value[1]++
-             } else if (el === "D") {
-               routes.value[2]++
-             } else {
-               routes.value[3]++
-             }
-             
-             
-           })
-           console.log(routes.value)
-      console.log(usedata.value)
-    } catch (error) {
-      console.log(error)
+    })
+    if (!response.ok) {
+      const error = new Error(`${response.url}: ${response.status} ${response.statusText}`)
+      error.response = response
+      throw error
     }
-  })()
+    const buffer = await response.arrayBuffer()
+    const feed = GtfsRealtimeBindings.transit_realtime.FeedMessage.decode(new Uint8Array(buffer))
+    data.value = feed.entity
+
+    data.value.forEach((el, i) => {
+      if (Object.prototype.hasOwnProperty.call(el, 'vehicle')) {
+        let pushed = { vehicle: el, tripUpdate: data.value[i - 1] }
+        gooddata.value.push(pushed)
+      }
+    })
+    gooddata.value.forEach((el) => {
+      usedata.value.push(el)
+    })
+  } catch (error) {
+    console.log(error)
+  }
+  function createlabels() {
+    labels.value = []
+    usedata.value.forEach((el) => {
+    labels.value.push(el.vehicle.vehicle.trip.routeId)
+  })
+  }
+  createlabels()
+  
 }
 
 export async function getPosition(options) {
@@ -83,7 +65,7 @@ const toSeconds = function (digit) {
 }
 
 export const dataForChart = function () {
-  const returnedData = [0,0,0,0]
+  const returnedData = [0, 0, 0, 0]
   const data = usedata.value
   data.forEach((piece) => {
     switch (piece.vehicle.vehicle.trip.routeId) {
@@ -125,4 +107,19 @@ function mostCommon(arr) {
   } else {
     return mode
   }
+}
+
+export function doLabels() {
+  routes.value= [0,0,0,0]
+  labels.value.forEach((el) => {
+    if (el === 'B') {
+      routes.value[0]++
+    } else if (el === 'F') {
+      routes.value[1]++
+    } else if (el === 'D') {
+      routes.value[2]++
+    } else {
+      routes.value[3]++
+    }
+  })
 }
