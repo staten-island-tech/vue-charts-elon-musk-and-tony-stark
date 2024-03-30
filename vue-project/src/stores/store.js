@@ -5,7 +5,6 @@ export const usedata = ref([])
 export const labels = ref([])
 export const routes = ref([0, 0, 0, 0])
 export const fetchData = async function (urlInput) {
-  console.log('refreshing data')
   const data = ref([])
   const gooddata = ref([])
   gooddata.value = []
@@ -26,7 +25,6 @@ export const fetchData = async function (urlInput) {
     const buffer = await response.arrayBuffer()
     const feed = GtfsRealtimeBindings.transit_realtime.FeedMessage.decode(new Uint8Array(buffer))
     data.value = feed.entity
-    console.log(data.value)
 
     data.value.forEach((el, i) => {
       if (Object.prototype.hasOwnProperty.call(el, 'vehicle')) {
@@ -34,22 +32,17 @@ export const fetchData = async function (urlInput) {
         gooddata.value.push(pushed)
       }
     })
-    console.log(gooddata.value)
     gooddata.value.forEach((el) => {
       usedata.value.push(el)
-      console.log(`pushing data to USE`)
     })
-    console.log(usedata.value)
   } catch (error) {
     console.log(error)
   }
   function createlabels() {
     labels.value = []
     usedata.value.forEach((el) => {
-    console.log(el)
     labels.value.push(el.vehicle.vehicle.trip.routeId)
   })
-  console.log('routes' + routes.value)
   }
   createlabels()
   
@@ -129,5 +122,4 @@ export function doLabels() {
       routes.value[3]++
     }
   })
-  console.log(`labels ${routes.value}`)
 }

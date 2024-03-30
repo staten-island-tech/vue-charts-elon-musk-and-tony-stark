@@ -1,5 +1,5 @@
 <template>
-  <div>{{ dataForChart(data) }}</div>
+  <div class="why-does-this-work">{{ dataForChart(data) }}</div>
   <Doughnut :key=0 id="my-chart-id" :options="chartOptions" :data="chartData" />
 </template>
 
@@ -64,4 +64,8 @@ const chartOptions = {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="css" scoped>
+.why-does-this-work {
+  visibility: hidden;
+}
+</style>

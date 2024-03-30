@@ -1,8 +1,8 @@
 <template>
   <div>
     <div class="select-wrap">
-      <h2>Selected: {{ select }}</h2>
-      <select v-model="select" name="" id="select">
+      <label for="select">Selected: {{ select }}</label>
+      <select v-model="select" name="select" id="select">
         <option disabled value="">--Select a Train--</option>
         <option value="">All</option>
         <option>B</option>
@@ -27,20 +27,23 @@
         </div>
       </div>
     </div>
-    <div v-else v-for="item in sort(select)" :key="item.id">
-      <div v-if="stops[item.vehicle.vehicle.stopId]" class="card">
-        <h2>{{ item.vehicle.vehicle.trip.routeId }}</h2>
-        <h2>{{ routes[item.vehicle.vehicle.trip.routeId].route_long_name }}</h2>
-        <h2>Currently stopped at: {{ stops[item.vehicle.vehicle.stopId].stop_name }}</h2>
-
-        <h3 v-for="stop in item.tripUpdate.tripUpdate.stopTimeUpdate" :key="stop.arrival.time">
-          <h3 v-if="stops[stop.stopId]">
-            Arrives at {{ stops[stop.stopId].stop_name }} in
-            {{ timeToStop(stop.arrival.time) }} minutes.
-          </h3>
-        </h3>
-        <h2>{{ item }}</h2>
+    <div v-else>
+      <div v-if="sort(select)[0]">
+        <div v-for="item in sort(select)" :key="item.id">
+          <div v-if="stops[item.vehicle.vehicle.stopId]" class="card">
+            <h2>{{ item.vehicle.vehicle.trip.routeId }}</h2>
+            <h2>{{ routes[item.vehicle.vehicle.trip.routeId].route_long_name }}</h2>
+            <h2>Currently stopped at: {{ stops[item.vehicle.vehicle.stopId].stop_name }}</h2>
+            <h3 v-for="stop in item.tripUpdate.tripUpdate.stopTimeUpdate" :key="stop.arrival.time">
+              <h3 v-if="stops[stop.stopId]">
+                Arrives at {{ stops[stop.stopId].stop_name }} in
+                {{ timeToStop(stop.arrival.time) }} minutes.
+              </h3>
+            </h3>
+          </div>
+        </div>
       </div>
+      <div v-else class="text-center">Information Not Available!</div>
     </div>
   </div>
 </template>
@@ -88,7 +91,7 @@ h3 {
 }
 
 .select-wrap {
-  text-align: center    ;
+  text-align: center;
 }
 </style>
 @/stores/google_transit/stops
