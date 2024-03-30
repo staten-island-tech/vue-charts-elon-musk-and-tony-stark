@@ -1,17 +1,19 @@
 <template>
   <div>
-    <h2>Selected: {{ select }}</h2>
-    <select v-model="select" name="" id="select">
-      <option disabled value="">--Select a Train--</option>
-      <option value="">All</option>
-      <option>B</option>
-      <option>D</option>
-      <option>F</option>
-      <option>M</option>
-    </select>
+    <div class="select-wrap">
+      <h2>Selected: {{ select }}</h2>
+      <select v-model="select" name="" id="select">
+        <option disabled value="">--Select a Train--</option>
+        <option value="">All</option>
+        <option>B</option>
+        <option>D</option>
+        <option>F</option>
+        <option>M</option>
+      </select>
+    </div>
     <div v-if="select === ''">
       <div v-for="item in data" :key="item.id">
-        <div v-if="stops[item.vehicle.vehicle.stopId]">
+        <div v-if="stops[item.vehicle.vehicle.stopId]" class="card">
           <h2>{{ item.vehicle.vehicle.trip.routeId }}</h2>
           <h2>{{ routes[item.vehicle.vehicle.trip.routeId].route_long_name }}</h2>
           <h2>Currently stopped at: {{ stops[item.vehicle.vehicle.stopId].stop_name }}</h2>
@@ -22,12 +24,11 @@
               {{ timeToStop(stop.arrival.time) }} minutes.
             </h3>
           </h3>
-          <h2>{{ item }}</h2>
         </div>
       </div>
     </div>
     <div v-else v-for="item in sort(select)" :key="item.id">
-      <div v-if="stops[item.vehicle.vehicle.stopId]">
+      <div v-if="stops[item.vehicle.vehicle.stopId]" class="card">
         <h2>{{ item.vehicle.vehicle.trip.routeId }}</h2>
         <h2>{{ routes[item.vehicle.vehicle.trip.routeId].route_long_name }}</h2>
         <h2>Currently stopped at: {{ stops[item.vehicle.vehicle.stopId].stop_name }}</h2>
@@ -67,11 +68,27 @@ const sort = function (route) {
   })
   return sorted
 }
-
-
-
-
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="css" scoped>
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+.card {
+  border: solid black 5px;
+  width: 90vw;
+  margin: auto;
+  margin-bottom: 1%;
+  padding: 1%;
+}
+
+.select-wrap {
+  text-align: center    ;
+}
+</style>
 @/stores/google_transit/stops

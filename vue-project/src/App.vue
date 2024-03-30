@@ -6,21 +6,22 @@ import { usedata as data } from './stores/store';
 </script>
 
 <template>
+  <h1 class="title">Graph API Project</h1>
   <header>
     <div class="wrapper flex flex-row justify-center m-auto w-full">
       <nav class="flex justify-center m-auto">
-        <button class="mr-10 bg-slate-300 border-2 border-black hover:bg-slate-600">
+        <button class="mr-10 bg-slate-300 border-2 border-black hover:bg-slate-600 hover:text-gray-50">
           <RouterLink to="/" class=" ">Home</RouterLink>
         </button>
 
-        <button class="bg-slate-300 border-2 border-black hover:bg-slate-600">
+        <button class="bg-slate-300 border-2 border-black hover:bg-slate-600 hover:text-gray-50">
           <RouterLink to="/graphs" class="]"> Graphs</RouterLink>
         </button>
-        <button class="bg-slate-300 border-2 border-black hover:bg-slate-600">
+        <button class="bg-slate-300 border-2 border-black hover:bg-slate-600 hover:text-gray-50">
           <RouterLink to="/graphTwo" class="]"> Graphs 2</RouterLink>
         </button>
         <button
-          class="button bg-slate-300 border-2 border-black hover:bg-slate-600"
+          class="button bg-slate-300 border-2 border-black hover:bg-slate-600 hover:text-gray-50"
           @click="
             fetchData('https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-bdfm')
           "
@@ -33,4 +34,10 @@ import { usedata as data } from './stores/store';
   <RouterView :data="data"/>
 </template>
 
-<style scoped></style>
+<style scoped>
+.title {
+  font-size: 5rem;
+  text-align: center;
+}
+
+</style>
