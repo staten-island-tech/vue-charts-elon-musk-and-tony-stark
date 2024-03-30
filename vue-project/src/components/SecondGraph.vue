@@ -1,6 +1,6 @@
 <template>
-  <div>{{ dataForChart(data) }}</div>
-  <Doughnut id="my-chart-id" :options="chartOptions" :data="chartData" />
+  <div class="why-does-this-work">{{ dataForChart(data) }}</div>
+  <Doughnut :key=0 id="my-chart-id" :options="chartOptions" :data="chartData" />
 </template>
 
 <script setup>
@@ -14,35 +14,58 @@ import {
   CategoryScale,
   LinearScale
 } from 'chart.js'
-import { usedata as data, dataForChart } from '@/stores/store'
-import { ref } from 'vue';
+import { usedata as data, dataForChart, fetchData } from '@/stores/store'
+import { onMounted } from 'vue'
 
 ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale)
 const chartNumbers = dataForChart(data)
-const chartData = {
+let chartData = {
   labels: ['B', 'F', 'D', 'M'],
   datasets: [
     {
       label: 'Most common time to stop per line in minutes',
       backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
-      data: chartNumbers
+      data: Array
     }
   ]
 }
 
-setInterval(function() {
-  chartData.datasets[0].data = dataForChart(data)
-},1000)
-
-
+onMounted(() => {
+  fetchData('https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-bdfm')
+  chartData = {
+    labels: ['B', 'F', 'D', 'M'],
+    datasets: [
+      {
+        label: 'Most common time to stop per line in minutes',
+        backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
+        data: chartNumbers
+      }
+    ]
+  }
+  setInterval(function () {
+    chartData = {
+      labels: ['B', 'F', 'D', 'M'],
+      datasets: [
+        {
+          label: 'Most common time to stop per line in minutes',
+          backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
+          data: chartNumbers
+        }
+      ]
+    }
+    this.key++
+  }, 1000)
+})
 
 const chartOptions = {
   maintainAspectRatio: true,
   aspectRatio: 16 / 9,
   responsive: true
 }
-
-
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="css" scoped>
+.why-does-this-work {
+  visibility: hidden;
+}
+</style>
