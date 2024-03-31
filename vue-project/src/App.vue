@@ -1,7 +1,12 @@
 <script setup>
 import { RouterLink, RouterView } from 'vue-router'
 import { fetchData } from './stores/store'
+import { usedata as data } from './stores/store';
+import { onBeforeMount } from 'vue';
 
+onBeforeMount(() => {
+  fetchData('https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-bdfm')
+})
 </script>
 
 <template>
