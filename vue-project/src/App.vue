@@ -14,18 +14,10 @@ import { fetchData } from './stores/store'
         </button>
 
         <button class="bg-slate-300 border-2 border-black hover:bg-slate-600 hover:text-gray-50">
-          <RouterLink to="/graphs" class="]"> Graphs</RouterLink>
+          <RouterLink to="/graphs" class="]"> Graph 1</RouterLink>
         </button>
         <button class="bg-slate-300 border-2 border-black hover:bg-slate-600 hover:text-gray-50">
-          <RouterLink to="/graphTwo" class="]"> Graphs 2</RouterLink>
-        </button>
-        <button
-          class="button bg-slate-300 border-2 border-black hover:bg-slate-600 hover:text-gray-50"
-          @click="
-            fetchData('https://api-endpoint.mta.info/Dataservice/mtagtfsfeeds/nyct%2Fgtfs-bdfm')
-          "
-        >
-          Refresh Data
+          <RouterLink to="/graphTwo" class="]"> Graph 2</RouterLink>
         </button>
       </nav>
     </div>
